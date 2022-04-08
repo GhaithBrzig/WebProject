@@ -1,0 +1,26 @@
+{% extends "base.html.twig" %}
+{% block title %} Update Category {% endblock %}
+{% block container %}
+<div class="container tm-mt-big tm-mb-big " >
+    <div class="row" >
+      <div class="col-xl-9 col-lg-10 col-md-12 col-sm-12 mx-auto">
+        <div class="tm-bg-primary-dark tm-block tm-block-h-auto">
+          <div class="row">
+            <div class="col-12" align="center">
+              <h2 class="tm-block-title d-inline-block ">Update Category</h2>
+            </div>
+          </div>
+          <div class="tm-bg-primary-dark tm-block tm-block-h-auto" align="center">
+            {{form_start(form, {'attr': {'novalidate': 'novalidate'}})}}
+      {{form_errors(f)}}
+          {{form_widget(f)}}
+          {{form_end(f)}}
+        </div>
+           
+          </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

@@ -1,0 +1,53 @@
+{% extends "base.html.twig" %}
+{% block title %} Reclamations {% endblock %}
+{% block container %}
+
+
+<div class="container mt-5">
+    <div class="row tm-content-row justify-content-center">
+      <div class="col-sm-15 col-md-15 col-lg-10 col-xl-10 tm-block-col">
+        <div class="tm-bg-primary-dark tm-block tm-block-products">
+          <div class="tm-product-table-container">
+            <table class="table table-hover tm-table-small tm-product-table">
+              <thead>
+                <tr>
+                 
+                  <th scope="col">Client Name</th>
+                  <th scope="col">Client Email</th>
+                  <th scope="col">Description</th>
+                  <th scope="col">Date</th>
+                  <th scope="col">Is Solved</th>
+                  <th scope="col">Delete</th>
+                  <th scope="col">Solved</th>
+                  <th scope="col">&nbsp;</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr {% for r in (reclamations|sort((a, b) => a.issolved <=> b.issolved))|sort((a, b) => a.date <=> b.date) %}>
+              
+                  <td> {{r.nomclient}} </td>
+                  <td> {{r.emailclient}} </td>
+                  <td> {{r.description|length > 15 ? r.description|slice(0, 15) ~ '...' : r.description}} </td>
+                  <td> {{r.date.format('d/m/Y')}} </td>
+                  <td> {{r.issolved}} </td>
+                  <td>
+                    <a href="{{ path('Delr',{'id':r.id}) }}">
+                      <i class="far fa-trash-alt tm-product-delete-icon" style='font-size:20px;color:red'></i>
+                    </a>
+                  </td>
+                  <td>
+                    <a href="{{ path('solve',{'id':r.id}) }}">
+                      <i class="fas fa-duotone fa-check" style='font-size:20px;color:rgb(0, 255, 0)'></i>
+                    </a>
+                  </td>
+                </tr {% endfor %}>
+                
+              </tbody>
+            </table>
+        </div>
+    </div>
+  </div>
+</div>
+</div>
+        
+  {% endblock %}
