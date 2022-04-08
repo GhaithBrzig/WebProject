@@ -14,7 +14,7 @@ class MailerService
     public function __construct(private MailerInterface $mailer)
     {
     }
-    public function sendEmail($content): void
+    public function sendEmail($content, $sub): void
     {
         $email = (new Email())
             ->from('tanwichette@gmail.com')
@@ -23,7 +23,7 @@ class MailerService
             //->bcc('bcc@example.com')
             //->replyTo('fabien@example.com')
             //->priority(Email::PRIORITY_HIGH)
-            ->subject('Reclamation')
+            ->subject($sub)
 
             ->html($content);
 

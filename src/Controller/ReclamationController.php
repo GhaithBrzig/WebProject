@@ -63,7 +63,7 @@ class ReclamationController extends AbstractController
             $em->persist($reclamation);
             $em->flush();
             $msg = '<strong>Client Name: </strong>' . $reclamation->getNomclient() . ' <br/>' . '<strong>Client Email: </strong>' . $reclamation->getEmailclient() . ' <br/>' . '<strong>Description: </strong>' . $reclamation->getDescription();
-            $mailer->sendEmail($msg);
+            $mailer->sendEmail($msg, 'Reclamation');
             return $this->redirectToRoute('index');
         }
         return $this->render('Front/Reclamation.html.twig', [
