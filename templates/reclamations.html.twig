@@ -23,7 +23,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr {% for r in (reclamations|sort((a, b) => a.issolved <=> b.issolved))|sort((a, b) => a.date <=> b.date) %}>
+                <tr {% for r in (reclamations|sort((a,b) => a.issolved <=> b.issolved))|sort((a,b) => a.date <=> b.date) %}>
               
                   <td> {{r.nomclient}} </td>
                   <td> {{r.emailclient}} </td>

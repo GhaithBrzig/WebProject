@@ -3,8 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Reclamation;
-use App\Service\MailService;
 use App\Form\ReclamationType;
+use App\Service\MailerService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
@@ -49,7 +49,7 @@ class ReclamationController extends AbstractController
     /**
      *  @Route("/reclamation/Add", name="addr")
      */
-    public function Add(Request $request)
+    public function Add(Request $request, MailerService $mailer)
     {
         $time = new \DateTime();
         $reclamation = new Reclamation();
@@ -62,6 +62,8 @@ class ReclamationController extends AbstractController
             $em = $this->getDoctrine()->getManager();
             $em->persist($reclamation);
             $em->flush();
+            $msg = '<strong>Client Name: </strong>' . $reclamation->getNomclient() . ' <br/>' . '<strong>Client Email: </strong>' . $reclamation->getEmailclient() . ' <br/>' . '<strong>Description: </strong>' . $reclamation->getDescription();
+            $mailer->sendEmail($msg);
             return $this->redirectToRoute('index');
         }
         return $this->render('Front/Reclamation.html.twig', [
