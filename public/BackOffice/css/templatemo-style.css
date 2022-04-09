@@ -357,8 +357,8 @@ thead {
   color: rgb(255, 255, 255);
   background-color: #f5a623;
   border: 0;
-  font-size: 100%;
-  font-weight: 300;
+  font-size: 90%;
+  font-weight: 600;
   margin: auto;
 
 }
@@ -416,11 +416,13 @@ thead {
 }
 
 .pagination a {
-  color: rgb(255, 72, 0);
+  color: rgb(255, 255, 255);
   float: left;
   padding: 8px 16px;
   text-decoration: none;
   margin: 0 2px;
+  background-color: #4e657a;
+  border-color: #4e657a;
 }
 input[type="checkbox"] {
   cursor: pointer;
