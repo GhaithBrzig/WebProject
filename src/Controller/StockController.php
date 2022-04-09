@@ -12,6 +12,8 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request as HttpFoundationRequest;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Doctrine\Persistence\ManagerRegistry;
+
 
 class StockController extends AbstractController
 {
@@ -28,7 +30,7 @@ class StockController extends AbstractController
 
 
     /**
-     *  @Route("/stock", name="stock")
+     *  @Route("/stocka", name="stocka")
      */
     public function DisplayStock()
     {
@@ -125,6 +127,25 @@ class StockController extends AbstractController
         $name = $request->get('search');
         $produit = $repository->SearchName($name);
         $category = $this->getDoctrine()->getRepository(StockCategory::class)->findAll();
-        return $this->render('stock.html.twig', ['produits' => $produit, 'categories' => $category]);
+        return $this->render('stock.html.twig', ['produits' => $produit, 'categories' => $category, 'isPaginated' => false]);
+    }
+
+    /**
+     *  @Route("/stock/{page?1}/{nbre?5}", name="stock")
+     */
+    public function DisplayStock2(StockRepository $repository, $page, $nbre)
+    {
+        $nbProduit = $repository->count([]);
+        $nbPage =  ceil($nbProduit / $nbre);
+        $produit = $repository->findBy([], [], $nbre, ($page - 1) * $nbre);
+        $category = $this->getDoctrine()->getRepository(StockCategory::class)->findAll();
+        return $this->render('stock.html.twig', [
+            'produits' => $produit,
+            'categories' => $category,
+            'isPaginated' => true,
+            'nbrePage' => $nbPage,
+            'page' => $page,
+            'nbre' => $nbre
+        ]);
     }
 }
