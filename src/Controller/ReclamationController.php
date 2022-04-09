@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Reclamation;
 use App\Form\ReclamationType;
+use App\Repository\ReclamationRepository;
 use App\Service\MailerService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -26,7 +27,7 @@ class ReclamationController extends AbstractController
     }
 
     /**
-     *  @Route("/DisplayReclamation", name="DisplayReclamation")
+     *  @Route("/DisplayReclamationa", name="DisplayReclamationa")
      */
     public function DisplayReclamation()
     {
@@ -99,5 +100,22 @@ class ReclamationController extends AbstractController
         $reclamation->setIssolved(1);
         $entityManager->flush();
         return $this->redirectToRoute("DisplayReclamation");
+    }
+
+    /**
+     *  @Route("/DisplayReclamation/{page?1}/{nbre?5}", name="DisplayReclamation")
+     */
+    public function DisplayReclamation2(ReclamationRepository $repository, $page, $nbre)
+    {
+        $nbReclamation = $repository->count([]);
+        $nbPage =  ceil($nbReclamation / $nbre);
+        $reclamation = $repository->findBy([], ["issolved" => "ASC", "date" => "ASC"], $nbre, ($page - 1) * $nbre);
+        return $this->render('reclamations.html.twig', [
+            'reclamations' => $reclamation,
+            'isPaginated' => true,
+            'nbrePage' => $nbPage,
+            'page' => $page,
+            'nbre' => $nbre
+        ]);
     }
 }
