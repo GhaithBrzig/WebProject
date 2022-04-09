@@ -7,6 +7,7 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\ORM\QueryBuilder;
 
 /**
  * @method Reclamation|null find($id, $lockMode = null, $lockVersion = null)
@@ -16,6 +17,7 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class ReclamationRepository extends ServiceEntityRepository
 {
+    private const DAYS_BEFORE_REJECTED_REMOVAL = 7;
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Reclamation::class);
@@ -74,4 +76,25 @@ class ReclamationRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function countOld(): int
+    {
+        return $this->getOldQueryBuilder()->select('COUNT(r.id)')->getQuery()->getSingleScalarResult();
+    }
+
+    public function deleteOld(): int
+    {
+        return $this->getOldQueryBuilder()->delete()->getQuery()->execute();
+    }
+
+    private function getOldQueryBuilder(): QueryBuilder
+    {
+        return $this->createQueryBuilder('r')
+            ->andWhere('r.issolved = :state')
+            ->andWhere('r.date < :date')
+            ->setParameters([
+                'state' => 1,
+                'date' => new \DateTimeImmutable(-self::DAYS_BEFORE_REJECTED_REMOVAL . ' days'),
+            ]);
+    }
 }

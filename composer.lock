@@ -4,8 +4,113 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e081012379b88046af68255910b79b75",
+    "content-hash": "5c8cf71764bc17467c14bb2958a7f40c",
     "packages": [
+        {
+            "name": "cron/cron",
+            "version": "1.6.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Cron/Cron.git",
+                "reference": "103d8562aca8a5fd135c69b3fe93aad0b5b701d4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Cron/Cron/zipball/103d8562aca8a5fd135c69b3fe93aad0b5b701d4",
+                "reference": "103d8562aca8a5fd135c69b3fe93aad0b5b701d4",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.2 || ^8.0",
+                "symfony/process": "^4.0|^5.0|^6.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^8.0 || ^9.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Cron\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Dries De Peuter",
+                    "email": "dries@nousefreak.be"
+                }
+            ],
+            "description": "Cronjobs",
+            "support": {
+                "issues": "https://github.com/Cron/Cron/issues",
+                "source": "https://github.com/Cron/Cron/tree/1.6.0"
+            },
+            "time": "2021-12-29T12:06:58+00:00"
+        },
+        {
+            "name": "cron/cron-bundle",
+            "version": "2.10.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Cron/Symfony-Bundle.git",
+                "reference": "8cc586d019d28ace0970c4677580071849c48ead"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Cron/Symfony-Bundle/zipball/8cc586d019d28ace0970c4677580071849c48ead",
+                "reference": "8cc586d019d28ace0970c4677580071849c48ead",
+                "shasum": ""
+            },
+            "require": {
+                "cron/cron": "^1.0.1",
+                "doctrine/doctrine-bundle": "~1.4|~2.0",
+                "doctrine/orm": "~2.4,>=2.4.5",
+                "php": ">=7.2",
+                "symfony/framework-bundle": "^3.4|^4.4|^5.0|^6.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^8.0",
+                "symfony/symfony": "^3.0|^4.0|^5.0"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Cron\\CronBundle\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Dries De Peuter",
+                    "email": "dries@nousefreak.be"
+                }
+            ],
+            "description": "Symfony cron",
+            "support": {
+                "issues": "https://github.com/Cron/Symfony-Bundle/issues",
+                "source": "https://github.com/Cron/Symfony-Bundle/tree/2.10.3"
+            },
+            "time": "2022-02-01T07:59:50+00:00"
+        },
         {
             "name": "doctrine/annotations",
             "version": "1.13.2",
@@ -1364,6 +1469,70 @@
             "time": "2021-11-05T11:11:14+00:00"
         },
         {
+            "name": "dragonmantank/cron-expression",
+            "version": "v2.3.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/dragonmantank/cron-expression.git",
+                "reference": "65b2d8ee1f10915efb3b55597da3404f096acba2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/dragonmantank/cron-expression/zipball/65b2d8ee1f10915efb3b55597da3404f096acba2",
+                "reference": "65b2d8ee1f10915efb3b55597da3404f096acba2",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.0|^8.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^6.4|^7.0|^8.0|^9.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.3-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Cron\\": "src/Cron/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Michael Dowling",
+                    "email": "mtdowling@gmail.com",
+                    "homepage": "https://github.com/mtdowling"
+                },
+                {
+                    "name": "Chris Tankersley",
+                    "email": "chris@ctankersley.com",
+                    "homepage": "https://github.com/dragonmantank"
+                }
+            ],
+            "description": "CRON for PHP: Calculate the next or previous run date and determine if a CRON expression is due",
+            "keywords": [
+                "cron",
+                "schedule"
+            ],
+            "support": {
+                "issues": "https://github.com/dragonmantank/cron-expression/issues",
+                "source": "https://github.com/dragonmantank/cron-expression/tree/v2.3.1"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/dragonmantank",
+                    "type": "github"
+                }
+            ],
+            "time": "2020-10-13T00:52:37+00:00"
+        },
+        {
             "name": "egulias/email-validator",
             "version": "3.1.2",
             "source": {
@@ -1512,6 +1681,65 @@
                 }
             ],
             "time": "2022-03-02T09:29:19+00:00"
+        },
+        {
+            "name": "glooby/task-bundle",
+            "version": "3.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/glooby/task-bundle.git",
+                "reference": "bf65b114956a403aa2181507632eefc5b591ebfb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/glooby/task-bundle/zipball/bf65b114956a403aa2181507632eefc5b591ebfb",
+                "reference": "bf65b114956a403aa2181507632eefc5b591ebfb",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/orm": "~2.6",
+                "dragonmantank/cron-expression": "~2.0",
+                "php": ">=7.1",
+                "symfony/framework-bundle": "~4.3"
+            },
+            "require-dev": {
+                "php-coveralls/php-coveralls": "~2.1",
+                "phpspec/prophecy": "~1.8",
+                "phpunit/phpunit": "^7",
+                "symfony/phpunit-bridge": "^4.3"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-4": {
+                    "Glooby\\TaskBundle\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Emil Kilhage",
+                    "email": "emil.kilhage@glooby.com",
+                    "homepage": "https://www.glooby.se"
+                }
+            ],
+            "description": "Scheduling of tasks for symfony made simple",
+            "homepage": "https://www.glooby.se",
+            "keywords": [
+                "bundle",
+                "cron",
+                "glooby",
+                "scheduler",
+                "symfony",
+                "task"
+            ],
+            "support": {
+                "issues": "https://github.com/glooby/task-bundle/issues",
+                "source": "https://github.com/glooby/task-bundle/tree/3.0.0"
+            },
+            "time": "2019-10-18T08:16:07+00:00"
         },
         {
             "name": "laminas/laminas-code",

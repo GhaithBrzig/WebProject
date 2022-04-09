@@ -74,7 +74,7 @@ class Reclamation
         return $this->nomclient;
     }
 
-    public function setNomclient(string $nomclient): self
+    public function setNomclient(?string $nomclient): self
     {
         $this->nomclient = $nomclient;
 
@@ -86,7 +86,7 @@ class Reclamation
         return $this->emailclient;
     }
 
-    public function setEmailclient(string $emailclient): self
+    public function setEmailclient(?string $emailclient): self
     {
         $this->emailclient = $emailclient;
 
@@ -98,7 +98,7 @@ class Reclamation
         return $this->description;
     }
 
-    public function setDescription(string $description): self
+    public function setDescription(?string $description): self
     {
         $this->description = $description;
 
@@ -122,7 +122,7 @@ class Reclamation
         return $this->issolved;
     }
 
-    public function setIssolved(bool $issolved): self
+    public function setIssolved(?bool $issolved): self
     {
         $this->issolved = $issolved;
 

@@ -1,4 +1,10 @@
 {
+    "cron/cron": {
+        "version": "1.6.0"
+    },
+    "cron/cron-bundle": {
+        "version": "2.10.3"
+    },
     "doctrine/annotations": {
         "version": "1.13",
         "recipe": {
@@ -79,11 +85,17 @@
     "doctrine/sql-formatter": {
         "version": "1.1.2"
     },
+    "dragonmantank/cron-expression": {
+        "version": "v2.3.1"
+    },
     "egulias/email-validator": {
         "version": "3.1.2"
     },
     "friendsofphp/proxy-manager-lts": {
         "version": "v1.0.7"
+    },
+    "glooby/task-bundle": {
+        "version": "3.0.0"
     },
     "laminas/laminas-code": {
         "version": "4.5.1"

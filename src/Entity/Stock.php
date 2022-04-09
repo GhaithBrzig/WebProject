@@ -83,7 +83,7 @@ class Stock
         return $this->nom;
     }
 
-    public function setNom(string $nom): self
+    public function setNom(?string $nom): self
     {
         $this->nom = $nom;
 
@@ -95,7 +95,7 @@ class Stock
         return $this->unite;
     }
 
-    public function setUnite(string $unite): self
+    public function setUnite(?string $unite): self
     {
         $this->unite = $unite;
 
@@ -107,7 +107,7 @@ class Stock
         return $this->quantite;
     }
 
-    public function setQuantite(int $quantite): self
+    public function setQuantite(?int $quantite): self
     {
         $this->quantite = $quantite;
 
@@ -119,7 +119,7 @@ class Stock
         return $this->prixUnitaire;
     }
 
-    public function setPrixUnitaire(float $prixUnitaire): self
+    public function setPrixUnitaire(?float $prixUnitaire): self
     {
         $this->prixUnitaire = $prixUnitaire;
 
@@ -131,7 +131,7 @@ class Stock
         return $this->prixTotal;
     }
 
-    public function setPrixTotal(float $prixTotal): self
+    public function setPrixTotal(?float $prixTotal): self
     {
         $this->prixTotal = $prixTotal;
 
