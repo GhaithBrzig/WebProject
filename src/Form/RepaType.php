@@ -11,7 +11,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
-
+use FOS\CKEditorBundle\Form\Type\CKEditorType;
 
 class RepaType extends AbstractType
 {
@@ -26,7 +26,7 @@ class RepaType extends AbstractType
 
                 )
             ))
-            ->add('description',TextareaType::class, array(
+            ->add('description',CKEditorType::class, array(
                 'label' => 'Description',
                 'attr' => array( 
                     'class' => 'form-control validate',

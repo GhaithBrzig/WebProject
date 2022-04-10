@@ -23,7 +23,7 @@ class Repa
     /**
      * @ORM\Column(type="string", length=60)
      * @Assert\NotBlank(message="Repa's Name is required" )
-     * @Assert\NotNull
+     * @Assert\NotNull(message="")
      */
     private $lib_prod;
 
@@ -41,7 +41,7 @@ class Repa
      *     message="Price value should be a number"
      * )
      * @Assert\NotBlank(message="Price is required")
-     * @Assert\NotNull
+     * @Assert\NotNull(message="")
      */
     private $prix_prod;
 
@@ -53,13 +53,13 @@ class Repa
      *     message="Quantity value should be a number"
      * )
      * @Assert\NotBlank(message="Quantity is required")
-     * @Assert\NotNull
+     * @Assert\NotNull(message="")
      */
     private $quantite_dispo;
 
     /**
      * @ORM\Column(type="string", length=30)
-     * @Assert\NotNull
+     * @Assert\NotNull(message="")
      */
     private $remise;
 
@@ -76,7 +76,7 @@ class Repa
     /**
      * @ORM\Column(type="string", length=180, nullable=true)
      * @Assert\NotBlank(message="You must select an image")
-     * @Assert\NotNull
+     * @Assert\NotNull(message="")
      */
     private $path;
 

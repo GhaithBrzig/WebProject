@@ -42,7 +42,11 @@ public function deleteCategorie($id)
     $em->remove($categorie);
     $em->flush();
      $this->getDoctrine()->getRepository(Repa::class)->updateNullCategorie();
-  //  var_dump($clean);
+  
+  $this->addFlash(
+    'cat_delete',
+    'Categorie is deleted!'
+   );
     return $this->redirectToRoute("repa");
 }
 
@@ -64,8 +68,13 @@ public function addCategorie(Request $request) : Response
       $em = $this->getDoctrine()->getManager();
       $em->persist($categories);
       $em->flush();
+      $this->addFlash(
+        'cat_add',
+        'Categorie is saved'
+    );
       return $this->redirectToRoute('repa');
         }
+        
     return $this->render('admin/addCategorie.html.twig',array('form' => $form->createView(), 'test' => $request ));
 }
 
@@ -119,6 +128,10 @@ public function addProduct(Request $request){
        $em = $this->getDoctrine()->getManager();
        $em->persist($repa);
        $em->flush();
+       $this->addFlash(
+        'repa_add',
+        'Repa added'
+       );
        return $this->redirectToRoute('repa');
           }
     return $this->render('admin/addRepa.html.twig',array('form' => $form->createView()));
@@ -179,6 +192,10 @@ public function editRepa(Request $request,$id){
 
         $em = $this->getDoctrine()->getManager();
         $em->flush($repa);
+        $this->addFlash(
+            'repa_update',
+            'Repa updated'
+           );
         return $this->redirectToRoute('repa');
     }
 
@@ -197,6 +214,10 @@ public function deleteRepa($id){
    $lib = implode((array) $repa->getLibProd());
 
     $filesystem->remove(["FrontOffice/images/Repas/$lib.png"]);
+    $this->addFlash(
+        'repa_delete',
+        'Repa deleted'
+       );
     return $this->redirectToRoute("repa");
 }
 }
