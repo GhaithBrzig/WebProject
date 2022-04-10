@@ -1,0 +1,87 @@
+
+{% extends "Admin_base.html.twig"%}
+{% block title %} Add repa {% endblock %}
+{% block container %}
+    <div class="container tm-mt-big tm-mb-big">
+      <div class="row">
+        <div class="col-xl-9 col-lg-10 col-md-12 col-sm-12 mx-auto">
+          <div class="tm-bg-primary-dark tm-block tm-block-h-auto">
+            <div class="row">
+              <div class="col-12">
+                <h2 class="tm-block-title d-inline-block">Add Product</h2>
+              </div>
+            </div>
+            <div class="row tm-edit-product-row">
+              <div class="col-xl-6 col-lg-6 col-md-12">
+               {{ form_start(form, {attr: {novalidate: 'novalidate'}}, {'method': 'POST'}) }}
+                <!--<form action="" class="tm-edit-product-form"> !-->
+                  <div class="form-group mb-3">
+                    {{ form_label(form.lib_prod) }}
+                    {{ form_widget(form.lib_prod) }}
+                    {{ form_errors(form.lib_prod) }}
+
+                  </div>
+                  <div class="form-group mb-3">
+                    {{ form_label(form.description) }}
+                    {{ form_widget(form.description) }}
+                    {{ form_errors(form.description) }}
+
+
+                  </div>
+                  <div class="form-group mb-3">
+                  {{ form_label(form.remise) }}
+                  {{ form_widget(form.remise) }} 
+                  {{ form_errors(form.remise) }}
+                   <br><br>
+
+                  {{ form_label(form.categorie) }}
+                  {{ form_widget(form.categorie) }}
+                  {{ form_errors(form.categorie) }}
+
+                  {#{ form_errors(form.categorie) }#}
+                  </div>
+                  <div class="row">
+                      <div class="form-group mb-3 col-xs-12 col-sm-6">
+                   {{ form_label(form.prix_prod) }}
+                   {{ form_widget(form.prix_prod) }}
+                   {{ form_errors(form.prix_prod) }}
+
+                   
+                        </div>
+                        <div class="form-group mb-3 col-xs-12 col-sm-6">
+                   {{ form_label(form.quantite_dispo) }}
+                   {{ form_widget(form.quantite_dispo) }}
+                   {{ form_errors(form.quantite_dispo) }}
+
+                        </div>
+                  </div>
+                  
+              </div>
+              <div class="col-xl-6 col-lg-6 col-md-12 mx-auto mb-4">
+                <div class="tm-product-img-dummy mx-auto">
+                  <i
+                    class="fas fa-cloud-upload-alt tm-upload-icon"
+                    
+                  >
+                  {{ form_widget(form.path) }}
+                  
+
+                  {#{ form_widget(form.path) }#}</i>
+                </div>
+                <div class="custom-file mt-3 mb-3">
+                  
+                  {{ form_errors(form.path, {attr: {style: 'color:red'}}) }}
+ 
+                </div>
+              </div>
+              <div class="col-12">
+                {{form_widget(form.AddProduct)}}
+              </div>
+            {{form_end(form)}}
+            
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+   {% endblock %}

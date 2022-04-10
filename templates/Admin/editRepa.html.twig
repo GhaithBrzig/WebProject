@@ -1,0 +1,63 @@
+
+{% extends "Admin_base.html.twig"%}
+{% block title %} edit repa {% endblock %}
+{% block container %}
+
+    <div class="container tm-mt-big tm-mb-big">
+      <div class="row">
+        <div class="col-xl-6 col-lg-10 col-md-12 col-sm-12 mx-auto">
+          <div class="tm-bg-primary-dark tm-block tm-block-h-auto">
+            <div class="row">
+              <div class="col-12">
+                <h2 class="tm-block-title d-inline-block">Add Product</h2>
+              </div>
+            </div>
+
+               {{ form_start(form,{attr: {novalidate: 'novalidate'}} , {'method': 'POST'}) }}
+                <!--<form action="" class="tm-edit-product-form"> !-->
+                  <div class="form-group mb-3">
+                    {{ form_label(form.lib_prod) }}
+                    {{ form_widget(form.lib_prod) }}
+                    {{ form_errors(form.lib_prod) }}
+
+                  </div>
+                  <div class="form-group mb-3">
+                    {{ form_label(form.description) }}
+                    {{ form_widget(form.description) }}
+
+                  </div>
+                  <div class="form-group mb-3">
+                  {{ form_label(form.remise) }}
+                  {{ form_widget(form.remise) }} <br><br>
+
+                  {{ form_label(form.categorie) }}
+                  {{ form_widget(form.categorie) }}
+                  {#{ form_errors(form.categorie) }#}
+                  </div>
+                  <div class="row">
+                      <div class="form-group mb-3 col-xs-12 col-sm-6">
+                   {{ form_label(form.prix_prod) }}
+                   {{ form_widget(form.prix_prod) }}
+                   
+                        </div>
+                        <div class="form-group mb-3 col-xs-12 col-sm-6">
+                   {{ form_label(form.quantite_dispo) }}
+                   {{ form_widget(form.quantite_dispo) }}
+                        </div>
+                  </div>
+                   {{form(form)}}
+              </div>
+
+                
+              </div>
+              <div class="col-12">
+               
+              </div>
+            {{form_end(form)}}
+            
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  {% endblock %}
