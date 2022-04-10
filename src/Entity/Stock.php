@@ -70,6 +70,7 @@ class Stock
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_categorie", referencedColumnName="ID")
      * })
+     * @Assert\NotBlank(message="category is required")
      */
     private $idCategorie;
 
