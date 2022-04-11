@@ -414,7 +414,9 @@ thead {
   border-color: #dee2e6;
   color: #000;
 }
-
+a {
+  color: #f5a623;
+}
 .pagination a {
   color: rgb(255, 255, 255);
   float: left;

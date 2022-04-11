@@ -147,4 +147,23 @@ class StockController extends AbstractController
             'nbre' => $nbre
         ]);
     }
+
+    /**
+     *  @Route("/stock2/{page?1}/{nbre?5}", name="stock2")
+     */
+    public function DisplayStock3(StockRepository $repository, $page, $nbre)
+    {
+        $nbProduit = $repository->count([]);
+        $nbPage =  ceil($nbProduit / $nbre);
+        $produit = $repository->findBy([], ["quantite" => "asc"], $nbre, ($page - 1) * $nbre);
+        $category = $this->getDoctrine()->getRepository(StockCategory::class)->findAll();
+        return $this->render('stock.html.twig', [
+            'produits' => $produit,
+            'categories' => $category,
+            'isPaginated' => true,
+            'nbrePage' => $nbPage,
+            'page' => $page,
+            'nbre' => $nbre
+        ]);
+    }
 }
