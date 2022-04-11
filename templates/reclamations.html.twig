@@ -30,16 +30,16 @@
                   <td> {{r.description|length > 15 ? r.description|slice(0, 15) ~ '...' : r.description}} </td>
                   <td> {{r.date.format('d/m/Y')}} </td>
                   {% if r.issolved %}
-                  <td> <i class="fas fa-light fa-check" style='font-size:20px;color:rgb(0, 255, 0)'></i></td>
+                  <td style="text-align:center"> <i class="fas fa-light fa-check" style='font-size:20px;color:rgb(0, 255, 0)'></i></td>
                   {% else %}
-                  <td><i class="fas fa-times" style='font-size:20px;color:red'></i></td>
+                  <td style="text-align:center"><i class="fas fa-times" style='font-size:20px;color:red'></i></td>
                   {% endif %}
-                  <td>
+                  <td style="text-align:center">
                     <a href="{{ path('Delr',{'id':r.id}) }}">
                       <i class="far fa-trash-alt tm-product-delete-icon" style='font-size:20px;color:red'></i>
                     </a>
                   </td>
-                  <td>
+                  <td style="text-align:center">
                     <a href="{{ path('solve',{'id':r.id}) }}">
                       <i class="fas fa-duotone fa-check" style='font-size:20px;color:rgb(0, 255, 0)'></i>
                     </a>

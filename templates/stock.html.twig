@@ -30,18 +30,18 @@
               <tbody>
                 <tr {% for p in produits %}>
               
-                  <td> {{p.IdCategorie.nom}} </td>
-                  <td> {{p.nom}} </td>
-                  <td> {{p.unite}} </td>
-                  <td> {{p.quantite}} </td>
-                  <td> {{p.PrixUnitaire}} </td>
-                  <td> {{p.PrixTotal}} </td>
-                  <td>
+                  <td style="text-align:center"> {{p.IdCategorie.nom}} </td>
+                  <td style="text-align:center"> {{p.nom}} </td>
+                  <td style="text-align:center"> {{p.unite}} </td>
+                  <td style="text-align:center"> {{p.quantite}} </td>
+                  <td style="text-align:center"> {{p.PrixUnitaire}} </td>
+                  <td style="text-align:center"> {{p.PrixTotal}} </td>
+                  <td style="text-align:center">
                     <a href="{{ path('del',{'id':p.id}) }}">
                       <i class="far fa-trash-alt tm-product-delete-icon" style='font-size:20px;color:rgb(255, 255, 255)'></i>
                     </a>
                   </td>
-                  <td>
+                  <td style="text-align:center">
                     <a href="{{ path('Upd',{'id':p.id}) }}">
                         <i class="fas fa-edit" style='font-size:20px;color:yellow'></i>
                     </a>
