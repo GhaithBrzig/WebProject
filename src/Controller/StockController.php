@@ -149,9 +149,9 @@ class StockController extends AbstractController
     }
 
     /**
-     *  @Route("/stock2/{page?1}/{nbre?5}", name="stock2")
+     *  @Route("/stockq/{page?1}/{nbre?500}", name="stock2")
      */
-    public function DisplayStock3(StockRepository $repository, $page, $nbre)
+    public function DisplayStockq(StockRepository $repository, $page, $nbre)
     {
         $nbProduit = $repository->count([]);
         $nbPage =  ceil($nbProduit / $nbre);
@@ -160,7 +160,43 @@ class StockController extends AbstractController
         return $this->render('stock.html.twig', [
             'produits' => $produit,
             'categories' => $category,
-            'isPaginated' => true,
+            'isPaginated' => false,
+            'nbrePage' => $nbPage,
+            'page' => $page,
+            'nbre' => $nbre
+        ]);
+    }
+    /**
+     *  @Route("/stockn/{page?1}/{nbre?500}", name="stock3")
+     */
+    public function DisplayStockn(StockRepository $repository, $page, $nbre)
+    {
+        $nbProduit = $repository->count([]);
+        $nbPage =  ceil($nbProduit / $nbre);
+        $produit = $repository->findBy([], ["nom" => "asc"], $nbre, ($page - 1) * $nbre);
+        $category = $this->getDoctrine()->getRepository(StockCategory::class)->findAll();
+        return $this->render('stock.html.twig', [
+            'produits' => $produit,
+            'categories' => $category,
+            'isPaginated' => false,
+            'nbrePage' => $nbPage,
+            'page' => $page,
+            'nbre' => $nbre
+        ]);
+    }
+    /**
+     *  @Route("/stockc/{page?1}/{nbre?500}", name="stock4")
+     */
+    public function DisplayStockc(StockRepository $repository, $page, $nbre)
+    {
+        $nbProduit = $repository->count([]);
+        $nbPage =  ceil($nbProduit / $nbre);
+        $produit = $repository->findBy([], ["idCategorie" => "asc"], $nbre, ($page - 1) * $nbre);
+        $category = $this->getDoctrine()->getRepository(StockCategory::class)->findAll();
+        return $this->render('stock.html.twig', [
+            'produits' => $produit,
+            'categories' => $category,
+            'isPaginated' => false,
             'nbrePage' => $nbPage,
             'page' => $page,
             'nbre' => $nbre
