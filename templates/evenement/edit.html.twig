@@ -80,11 +80,8 @@
 
                         <div class="col-4 text-right" style="display: -webkit-box;">
                             <a  style="margin-left: 105px;" class="btn btn-outline-primary btn-fw" href="{{ path('evenement_index') }}">Back</a>
-                            <form style=" margin-left: 105px;" method="post" action="{{ path('evenement_delete', {'id': evenement.id}) }}" onsubmit="return confirm('Vous voulez vraiment supprimer cette evenement?');">
-                                <input type="hidden" name="_token"
-                                       value="{{ csrf_token('delete' ~ evenement.id) }}">
-                                <button class="btn btn-outline-danger btn-fw">Delete</button>
-                            </form>
+                            <a style="margin-left: 105px;" class="btn btn-outline-primary btn-fw" href ="{{ path('evenement_delete', {'id': evenement.id}) }}">
+
                         </div>
                         {{ form_end(form) }}
                     </div>

@@ -91,9 +91,9 @@
                         </div>
                         <div class="col-4 text-right" style="display: -webkit-box;">
                             <a  style="margin-left: 105px;" class="btn btn-outline-primary btn-fw" href="{{ path('reservation_index') }}">Back</a>
-                           <a href ="{{ path('reservation_delete', {'id': reservation.id}) }}">
+                           <a style="margin-left: 105px;" class="btn btn-outline-primary btn-fw" href ="{{ path('reservation_delete', {'id': reservation.id}) }}">
 
-                                <button class="btn btn-outline-danger btn-fw">Delete</button>{{ reservation.id }}
+                            Delete
                            </a>
                         </div>
                         {{ form_end(form) }}
