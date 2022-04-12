@@ -46,7 +46,7 @@ class StockcategoryController extends AbstractController
 
 
     /**
-     *  @Route("/stock/Updatec/{id}", name="Updc")
+     *  @Route("/Updatec/{id}", name="Updc")
      */
     public function Update($id, Request $request)
     {
@@ -66,7 +66,7 @@ class StockcategoryController extends AbstractController
 
 
     /**
-     *  @Route("/stock/Addc", name="Addc")
+     *  @Route("/Addc", name="Addc")
      */
     public function Addc(Request $request)
     {

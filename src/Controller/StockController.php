@@ -104,6 +104,7 @@ class StockController extends AbstractController
         ]);
     }
 
+
     /**
      *  @Route("/stock/Search", name="SEARCH1")
      */
