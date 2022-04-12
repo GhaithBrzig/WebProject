@@ -1,0 +1,112 @@
+
+{% extends 'base.html.twig' %}
+ {% block stylesheets %}
+     <!-- Basic -->
+     <meta charset="utf-8" />
+     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+     <!-- Mobile Metas -->
+     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+     <!-- Site Metas -->
+     <meta name="keywords" content="" />
+     <meta name="description" content="" />
+     <meta name="author" content="" />
+     <link rel="shortcut icon" href="{{ asset('front/images/favicon.png') }}" type="">
+
+     <title> Feane </title>
+
+     <!-- bootstrap core css -->
+     <link rel="stylesheet" type="text/css" href="{{ asset('front/css/bootstrap.css') }}" />
+
+     <!--owl slider stylesheet -->
+     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+     <!-- nice select  -->
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/css/nice-select.min.css" integrity="sha512-CruCP+TD3yXzlvvijET8wV5WxxEh5H8P4cmz0RFbKK6FlZ2sYl3AEsKlLPHbniXKSrDdFewhbmBK5skbdsASbQ==" crossorigin="anonymous" />
+     <!-- font awesome style -->
+     <link href="{{ asset('front/css/font-awesome.min.css') }}" rel="stylesheet" />
+
+     <!-- Custom styles for this template -->
+     <link href="{{ asset('front/css/style.css') }}" rel="stylesheet" />
+     <!-- responsive style -->
+     <link href="{{ asset('front/css/responsive.css') }}" rel="stylesheet" />
+
+     <style>
+         #reservation_date{
+             display:flex;
+             border: none;
+         }
+
+         .date-event label{
+             width: 5%;
+             margin-top: 6px;
+             border: 2px solid #ffbe33;
+             margin-bottom: 27px;
+             text-align: center;
+             border-radius: 6px;
+             padding-top: 6px;
+         }
+     </style>
+ {% endblock %}
+{% block content %}
+    <section class="book_section layout_padding">
+        <div class="container">
+            <div class="heading_container">
+                <h2>
+                    Réservez votre Table
+                </h2>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form_container">
+                        {{ form_start(form) }}
+                        <div class="btn_box">
+                        {# <button type="submit" class="btn">{{ button_label|default('Modifier') }}</button> #}
+
+
+                        <div>
+                            {{ form_widget(form.nomclient, {'attr' : { 'class' : 'form-control' , 'placeholder' : 'nom client'}}) }}
+                        </div>
+                        </div>
+                        <div>
+                            {{ form_widget(form.numero, {'attr' : { 'class' : 'form-control' , 'placeholder' : 'numero client'}}) }}
+                        </div>
+                        <div>
+                            {{ form_widget(form.nbpersonne, {'attr' : { 'class' : 'form-control' , 'placeholder' : 'nombre personne'}}) }}
+                        </div>
+                        <div class="date-event" style="display:flex;">
+                            {{ form_label(form.date) }}
+
+                            {{ form_widget(form.date, {'attr' : { 'class' : 'form-control'}}) }}
+                        </div>
+                        <div>
+                            {{ form_widget(form.idEvenement, {'attr' : { 'class' : 'form-control' , 'placeholder' : 'id evennement'}}) }}
+                        </div>
+                        <div>
+                            {{ form_row(form.Save) }}
+                        </div>
+
+                        {{form_rest (form)}}
+                        <div class="col-4 text-right" style="display: -webkit-box;">
+
+                        </div>
+                        <div class="col-4 text-right" style="display: -webkit-box;">
+                            <a  style="margin-left: 105px;" class="btn btn-outline-primary btn-fw" href="{{ path('reservation_index') }}">Back</a>
+                           <a href ="{{ path('reservation_delete', {'id': reservation.id}) }}">
+
+                                <button class="btn btn-outline-danger btn-fw">Delete</button>{{ reservation.id }}
+                           </a>
+                        </div>
+                        {{ form_end(form) }}
+                        <div class="btn_box">
+                            <a  style="margin-left: 105px;" class="btn btn-outline-primary btn-fw" href="{{ path('reservation_index') }}">Back</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock content %}

@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Reservation{% endblock %}
+
+{% block body %}
+    <h1>Reservation</h1>
+
+
+    <div class="filters-content">
+        <div class="row grid">
+            {% for reservation in reservations %}
+                <div class="col-sm-6 col-lg-4 all pizza">
+                    <div class="box">
+                        <div>
+                            <div class="img-box">
+                                <img src=" {{ asset('') }}" alt="">
+                            </div>
+                            <div class="detail-box">
+                                <h5>
+                                    {{ reservation.nomclient }}
+                                </h5>
+                                <p>
+                                    {{ reservation.numero }}
+                                </p>
+                                <div class="options">
+                                    <h6>
+                                        {{ reservation.nbpersonne }}
+                                    </h6>
+                                    <h6>
+                                        {{ reservation.date ? reservation.date|date('Y-m-d') : '' }}
+                                    </h6>
+                                    <h6>
+                                        {{ reservation.idEvenement }}
+                                    </h6>
+                                    <h6>
+                                        {{ reservation.archived ? 'Yes' : 'No' }}
+                                    </h6>
+                                    <a href="{{ path('reservation_edit', {'id': reservation.id}) }}"><h6>Edit</h6></a>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+
+        </div>
+    </div>
+
+
+    <a href="{{ path('reservation_index') }}">back to list</a>
+
+
+
+
+{% endblock body  %}
