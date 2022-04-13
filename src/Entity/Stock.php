@@ -45,6 +45,7 @@ class Stock
      *
      * @ORM\Column(name="Quantite", type="integer", nullable=false)
      * @Assert\NotBlank(message="Quantity is required")
+     * @Assert\PositiveOrZero(message="Quantity cannot be negative")
      */
     private $quantite;
 
@@ -53,6 +54,7 @@ class Stock
      *
      * @ORM\Column(name="prix_unitaire", type="float", precision=10, scale=0, nullable=false)
      * @Assert\NotBlank(message="Unit Price is required")
+     * @Assert\PositiveOrZero(message="Unit Price cannot be negative")
      */
     private $prixUnitaire;
 

@@ -8,6 +8,8 @@ use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+
 
 class StockFType extends AbstractType
 {
@@ -15,11 +17,15 @@ class StockFType extends AbstractType
     {
         $builder
             ->add('nom', null, [
-                'label' => 'Name',
-
+                'label' => 'Name'
             ])
-            ->add('unite', null, [
-                'label' => 'Unit'
+            ->add('unite', ChoiceType::class, [
+                'label' => 'Unit',
+                'choices' => [
+                    'Kg' => 'Kg',
+                    'Gram' => 'Gram',
+                    'Litre' => 'Litre'
+                ]
             ])
             ->add('quantite', NumberType::class, [
                 'label' => 'Quantity',

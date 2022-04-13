@@ -18,13 +18,12 @@
                   <th scope="col">Date</th>
                   <th scope="col">Is Solved</th>
                   <th scope="col">Delete</th>
-                  <th scope="col">Solved</th>
+                  <th scope="col">Solve</th>
                   <th scope="col">&nbsp;</th>
                 </tr>
               </thead>
               <tbody>
                 <tr {% for r in reclamations %}>
-              
                   <td> {{r.nomclient}} </td>
                   <td> {{r.emailclient}} </td>
                   <td> {{r.description|length > 15 ? r.description|slice(0, 15) ~ '...' : r.description}} </td>
@@ -39,11 +38,13 @@
                       <i class="far fa-trash-alt tm-product-delete-icon" style='font-size:20px;color:red'></i>
                     </a>
                   </td>
+                  {% if (r.issolved == 0) %}
                   <td style="text-align:center">
                     <a href="{{ path('solve',{'id':r.id}) }}">
                       <i class="fas fa-duotone fa-check" style='font-size:20px;color:rgb(0, 255, 0)'></i>
                     </a>
                   </td>
+                  {% endif %}
                 </tr {% endfor %}>
                 
               </tbody>
