@@ -84,7 +84,7 @@ class StockController extends AbstractController
 
 
     /**
-     *  @Route("/stock/Update/{id}", name="Upd")
+     *  @Route("stock/Update/{id}", name="Upd")
      */
     public function Update($id, HttpFoundationRequest $request, MailerService $mailer)
     {
