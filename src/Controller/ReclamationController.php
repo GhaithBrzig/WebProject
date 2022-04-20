@@ -11,8 +11,11 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-
-
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Encoder\XmlEncoder;
+use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
 
 class ReclamationController extends AbstractController
 {
@@ -36,7 +39,7 @@ class ReclamationController extends AbstractController
     }
 
     /**
-     *  @Route("/Deleter/{id}", name="Delr")
+     *  @Route("Deleter/{id}", name="Delr")
      */
     public function Deleter($id)
     {
@@ -91,7 +94,7 @@ class ReclamationController extends AbstractController
         ]);
     }
     /**
-     *  @Route("/reclamation/solve/{id}", name="solve")
+     *  @Route("reclamation/solve/{id}", name="solve")
      */
     function Solve($id)
     {
@@ -117,5 +120,26 @@ class ReclamationController extends AbstractController
             'page' => $page,
             'nbre' => $nbre
         ]);
+    }
+
+
+    /**
+     * @param StockRepository $repository
+     * @param Request $request
+     * @return Response
+     * @Route("/searchNamer", name="searchnamer")
+     */
+    public function SearchName(Request $request, NormalizerInterface $Normalizer, ReclamationRepository $repository)
+    {
+        $encoders = array(new XmlEncoder(), new JsonEncoder());
+        $normalizers = array(new ObjectNormalizer());
+
+        $serializer = new Serializer($normalizers, $encoders);
+
+        $requestString = $request->get('searchValue');
+        $reclamations = $repository->SearchName($requestString);
+        $jsonContent = $serializer->serialize($reclamations, 'json');
+        $retour = json_encode($jsonContent);
+        return new Response($retour);
     }
 }

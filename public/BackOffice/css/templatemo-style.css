@@ -417,6 +417,13 @@ thead {
 a {
   color: #f5a623;
 }
+.hide-text {
+  width: 135px;
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden !important;
+  text-overflow: ellipsis;
+}
 .pagination a {
   color: rgb(255, 255, 255);
   float: left;

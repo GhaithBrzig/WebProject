@@ -97,4 +97,11 @@ class ReclamationRepository extends ServiceEntityRepository
                 'date' => new \DateTimeImmutable(-self::DAYS_BEFORE_REJECTED_REMOVAL . ' days'),
             ]);
     }
+    function SearchName($nom)
+    {
+        return $this->createQueryBuilder('s')
+            ->where('s.nomclient LIKE :nom')
+            ->setParameter('nom', '%' . $nom . '%')
+            ->getQuery()->getResult();
+    }
 }
