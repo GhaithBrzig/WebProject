@@ -8,6 +8,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\SubmitButton;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 
 class ReservationType extends AbstractType
 {
@@ -17,7 +18,11 @@ class ReservationType extends AbstractType
             ->add('nomclient')
             ->add('numero')
             ->add('nbpersonne')
-            ->add('date')
+            ->add('date', DateType::class, [
+                'widget' => "single_text",
+                'input'  => 'datetime_immutable'
+
+            ])
             ->add('idEvenement')
             ->add("Save" , SubmitType::class,
             ['attr'=>['formnovalidate'=>'formnovalidate']])

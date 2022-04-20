@@ -2,19 +2,64 @@
 
 {% block title %}Hello ListeReservationController!{% endblock %}
 
-{% block content %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+{% block body %}
+<section class="food_section layout_padding">
+    <div class="container">
+        <div class="heading_container heading_center">
+            <h2>
+                Reservations
+            </h2>
+        </div>
 
-<div class="example-wrapper">
-    <h1>Hello {{ reservations}}! ✅</h1>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/xampp/htdocs/Tanwishette/src/Controller/ListeReservationController.php'|file_link(0) }}">src/Controller/ListeReservationController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/xampp/htdocs/Tanwishette/templates/liste_reservation/index.html.twig'|file_link(0) }}">templates/liste_reservation/index.html.twig</a></code></li>
-    </ul>
+
+        <div class="filters-content">
+            <div class="row grid">
+                {% for r in reservations%}
+                <div class="col-sm-6 col-lg-4 all pizza">
+                    <div class="box">
+                        <div>
+
+                            <div class="detail-box">
+                                <h1>
+                                    {{r.nomclient}}
+                                </h1>
+                                <p>
+                                    {{r.numero}}
+                                </p>
+
+                                    <p>
+                                        {{r.nbpersonne}}
+                                    </p>
+                                <p>
+                                {{ r.date ? r.date|date('Y-m-d') : '' }}
+                                </p>
+                                <p>
+
+                                {{ r.idEvenement }}
+                                </p>
+                                <p>
+
+                                {{ r.archived ? 'Yes' : 'No' }}
+                                </p>
+                                <a href="{{ path('reservation_show', {'id': r.id}) }}">show</a>
+                                <a href="{{ path('reservation_edit', {'id': r.id}) }}"><h6>Edit</h6></a>
+
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                {% endfor %}
+
+            </div>
+        </div>
+    </div>
+
+</section>
+<div class="btn-box justify-content-start">
+    <a href="{{ path('reservation_new') }}">Create new</a>
 </div>
-{% endblock %}
+            {% endblock %}

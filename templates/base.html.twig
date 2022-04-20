@@ -49,6 +49,13 @@
   <!-- responsive style -->
   <link href=" {{ asset('css/responsive.css')}}" rel="stylesheet" />
 
+  <script type="text/javascript" src="https://cdn.weglot.com/weglot.min.js"></script>
+  <script>
+    Weglot.initialize({
+      api_key: 'wg_d9235c7602b0459336d9aa64ca997dd98'
+    });
+  </script>
+
 </head>
 
 <body>
@@ -76,7 +83,7 @@
             <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{{ path("reservation_index") }}">Reservation</a>
+            <a class="nav-link" href="{{ path("liste_reservation") }}">Reservation</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{{ path("evenement_index") }}">evenement</a>

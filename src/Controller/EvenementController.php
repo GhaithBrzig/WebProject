@@ -16,6 +16,16 @@ use Symfony\Component\Routing\Annotation\Route;
 class EvenementController extends AbstractController
 {
     /**
+     * @Route("/liste/evenement", name="liste_evenement")
+     */
+    public function liste_evenement()
+    {
+        $evenement = $this->getDoctrine()->getRepository(Evenement::class)->findAll();
+
+        return $this->render('liste_evenement/index.html.twig',array( "evenements" => $evenement));
+
+    }
+    /**
      * @Route("/", name="evenement_index", methods={"GET"})
      */
     public function index(EntityManagerInterface $entityManager): Response

@@ -9,26 +9,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Knp\Component\Pager\PaginatorInterface;
 
 /**
  * @Route("/reservation")
  */
 class ReservationController extends AbstractController
 {
-    /**
-     * @Route("/reservationBack", name="reservation_Back", methods={"GET"})
-     */
-    public function indexBack(EntityManagerInterface $entityManager): Response
-    {
-        $reservations = $entityManager
-            ->getRepository(Reservation::class)
-            ->findAll();
-
-        return $this->render('reservation/reservationBack.html.twig', [
-            'reservations' => $reservations,
-        ]);
-    }
-
     /**
      * @Route("/", name="reservation_index", methods={"GET"})
      */
@@ -40,6 +27,27 @@ class ReservationController extends AbstractController
 
         return $this->render('reservation/index.html.twig', [
             'reservations' => $reservations,
+        ]);
+    }
+
+    /**
+     * @Route("/reservationBack", name="reservation_Back", methods={"GET"})
+     */
+    public function indexBack(EntityManagerInterface $entityManager, Request $request,PaginatorInterface $paginator): Response
+    {
+        $reservations = $entityManager
+            ->getRepository(Reservation::class)
+            ->findAll();
+
+        $respagination = $paginator->paginate(
+            $reservations, // on passe les donnees
+            $request->query->getInt('page', 1),// Numéro de la page en cours, passé dans l'URL, 1 si aucune page
+            5
+        );
+
+        return $this->render('reservation/reservationBack.html.twig', [
+            'reservations' => $respagination,
+
         ]);
     }
 
@@ -70,6 +78,7 @@ class ReservationController extends AbstractController
      */
     public function show(Reservation $reservation): Response
     {
+
         return $this->render('reservation/show.html.twig', [
             'reservation' => $reservation,
         ]);

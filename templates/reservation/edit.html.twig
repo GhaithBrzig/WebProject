@@ -60,8 +60,6 @@
                     <div class="form_container">
                         {{ form_start(form) }}
                         <div class="btn_box">
-                        {# <button type="submit" class="btn">{{ button_label|default('Modifier') }}</button> #}
-
 
                         <div>
                             {{ form_widget(form.nomclient, {'attr' : { 'class' : 'form-control' , 'placeholder' : 'nom client'}}) }}
@@ -74,7 +72,7 @@
                             {{ form_widget(form.nbpersonne, {'attr' : { 'class' : 'form-control' , 'placeholder' : 'nombre personne'}}) }}
                         </div>
                         <div class="date-event" style="display:flex;">
-                            {{ form_label(form.date) }}
+
 
                             {{ form_widget(form.date, {'attr' : { 'class' : 'form-control'}}) }}
                         </div>
@@ -89,16 +87,15 @@
                         <div class="col-4 text-right" style="display: -webkit-box;">
 
                         </div>
-                        <div class="col-4 text-right" style="display: -webkit-box;">
-                            <a  style="margin-left: 105px;" class="btn btn-outline-primary btn-fw" href="{{ path('reservation_index') }}">Back</a>
-                           <a style="margin-left: 105px;" class="btn btn-outline-primary btn-fw" href ="{{ path('reservation_delete', {'id': reservation.id}) }}">
+                        <div class="btn-box justify-content-start">
+                           <a href ="{{ path('reservation_delete', {'id': reservation.id}) }}">
 
                             Delete
                            </a>
                         </div>
                         {{ form_end(form) }}
-                        <div class="btn_box">
-                            <a  style="margin-left: 105px;" class="btn btn-outline-primary btn-fw" href="{{ path('reservation_index') }}">Back</a>
+                        <div class="btn-box justify-content-start">
+                            <a   href="{{ path('reservation_index') }}">Back</a>
                         </div>
                     </div>
                 </div>
