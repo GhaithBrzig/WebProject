@@ -12,7 +12,11 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request as HttpFoundationRequest;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Encoder\XmlEncoder;
+use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
 
 class StockController extends AbstractController
 {
@@ -122,7 +126,7 @@ class StockController extends AbstractController
      * @return Response
      *  @Route("/stock/SearchName", name="SEARCH")
      */
-    function SearchName(StockRepository $repository, HttpFoundationRequest $request)
+    function SearchNamed(StockRepository $repository, HttpFoundationRequest $request)
     {
         $name = $request->get('search');
         $produit = $repository->SearchName($name);
@@ -202,5 +206,25 @@ class StockController extends AbstractController
             'page' => $page,
             'nbre' => $nbre
         ]);
+    }
+
+    /**
+     * @param StockRepository $repository
+     * @param Request $request
+     * @return Response
+     * @Route("/searchName", name="searchname")
+     */
+    public function SearchName(HttpFoundationRequest $request, NormalizerInterface $Normalizer, StockRepository $repository)
+    {
+        $encoders = array(new XmlEncoder(), new JsonEncoder());
+        $normalizers = array(new ObjectNormalizer());
+
+        $serializer = new Serializer($normalizers, $encoders);
+
+        $requestString = $request->get('searchValue');
+        $produits = $repository->SearchName($requestString);
+        $jsonContent = $serializer->serialize($produits, 'json');
+        $retour = json_encode($jsonContent);
+        return new Response($retour);
     }
 }

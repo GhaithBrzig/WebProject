@@ -4,15 +4,15 @@
 
 <div class="container mt-5">
     <div class="row tm-content-row">
-      <div class="col-sm-12 col-md-12 col-lg-8 col-xl-8 tm-block-col">
+      <div class="col-sm-14 col-md-114 col-lg-8 col-xl-8 tm-block-col">
         <div class="tm-bg-primary-dark tm-block tm-block-products">
           <h2 class="tm-block-title">Stock</h2>
-            <form method="post" action="{{ path ('SEARCH')}}"> 
-            <input type="text" name="search" placeholder="Search"> <input type="submit" value="Search" class="btn-light" style="height:29px;">
-            </form>
+           
+            <input type="text" id="search" placeholder="Search" class="form-control"> 
+           
           <div class="tm-product-table-container">
             
-            <table class="table table-hover tm-table-small tm-product-table">
+            <table class="table table-hover tm-table-small tm-product-table" id="t">
               <thead>
                 <tr>
                  
@@ -27,7 +27,7 @@
                   <th scope="col">&nbsp;</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody id="all">
                 <tr {% for p in produits %}>
               
                   <td style="text-align:center"> {{p.IdCategorie.nom}} </td>
@@ -52,6 +52,10 @@
                 </tr {% endfor %}>
                 
               </tbody>
+          
+            <tbody id="searchtab">
+            
+            </tbody>
             </table>
           </div>
 
@@ -117,5 +121,58 @@
       </div>
     </div>
   </div>
-  
+
+<script
+src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
+</script>
+<script>
+$(document).ready(function(){
+$("#search").keyup(function(){
+/* La variable value va prendre la valeur insérer dans le
+champ de texte
+afin d’effectuer la recherche */
+var value = $(this).val();
+console.log("value : ")
+/* Ajax est lancé lors du remplissage du champ texte dont
+l’id est
+« search » pour faire la recherche */
+$.ajax({
+/* l’url est une chaine de caractères contenant
+l’adresse où la requête est
+6
+envoyée */
+url : "{{ path('searchname') }}",
+/* La méthode utilisée pour transférer les données est
+GET */
+type : 'GET',
+/*Ici search value va prendre la chaine entrée par un
+utilisateur dans la
+zone de recherche et sera placée après l’url */
+dataType: "json",
+data: {
+'searchValue' : value
+},
+/*Cette fonction permet de vider le contenu du tableau
+pour recevoir le
+nouveau contenu*/
+success : function(retour){
+if(retour){
+console.log(retour);
+$('#t tbody#searchtab').empty();
+$.each(JSON.parse(retour), function(i, obj) {
+$('#t tbody#all').hide();
+$('#t tbody#searchtab').append('<tr><td style="text-align:center"> '+obj.idCategorie.nom+'</td><td style="text-align:center"> '+obj.nom+' </td><td style="text-align:center">'+obj.unite+ '</td><td style="text-align:center">'+obj.quantite+ '</td><td>'+obj.prixUnitaire+ '</td><td style="text-align:center">'+obj.prixTotal+ '</td><td style="text-align:center"><a href="stock/delete/'+obj.id+'" > <i class="far fa-trash-alt tm-product-delete-icon"></i></a></td><td style="text-align:center"><a href="stock/Update/'+obj.id+'"> <i class="fas fa-edit" style="font-size:20px;color:yellow" ></i></a></td> </tr>');});
+}
+else
+{
+$('#t tbody#all').show();
+$('#t tbody#searchtab').empty();
+$('#t tbody#searchtab').fadeIn('fast');
+}
+},
+});
+return false;
+});
+});
+</script>
   {% endblock %}
