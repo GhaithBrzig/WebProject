@@ -12,6 +12,7 @@
   <meta name="description" content="" />
   <meta name="author" content="" />
   <link rel="shortcut icon" href="{{ asset('images/favicon.png') }} " type="">
+
   <title>{% block title %} Feane  {% endblock title %}</title>
   {% block javascript %}
   <script src="../public/js/jquery-3.4.1.min.js'"/>
@@ -48,6 +49,7 @@
   <link href=" {{ asset('css/style.css')}}" rel="stylesheet" />
   <!-- responsive style -->
   <link href=" {{ asset('css/responsive.css')}}" rel="stylesheet" />
+  <link rel="stylesheet" href="{{ asset('bundles/mercuryseriesflashy/css/flashy.css') }}">
 
   <script type="text/javascript" src="https://cdn.weglot.com/weglot.min.js"></script>
   <script>
@@ -1353,6 +1355,12 @@
 </footer>
 <!-- footer section -->
 
+!-- Flashy depends on jQuery -->
+<script src="//code.jquery.com/jquery.js"></script>
+<!-- Load Flashy default JavaScript -->
+<script src="{{ asset('bundles/mercuryseriesflashy/js/flashy.js') }}"></script>
+<!-- Include Flashy default partial -->
+{{ include('@MercurySeriesFlashy/flashy.html.twig') }}
 </body>
 
 </html>

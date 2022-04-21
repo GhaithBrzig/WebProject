@@ -31,8 +31,8 @@ class Evenement
      *  @Assert\Length(
      * min=3,
      * max=50,
-     * minMessage = "le nom de client doit comporter au moins {{ limit }}caractéres",
-     * maxMessage = "le nom de client doit comporter au plus {{ limit }} caractéres"
+     * minMessage = "le type d'evenement doit comporter au moins {{ limit }}caractéres",
+     * maxMessage = "le type d'evenement doit comporter au plus {{ limit }} caractéres"
      * )
      */
     private $type;
@@ -44,8 +44,8 @@ class Evenement
      * @Assert\Length(
      * min=3,
      * max=50,
-     * minMessage = "le nom de client doit comporter au moins {{ limit }}caractéres",
-     * maxMessage = "le nom de client doit comporter au plus {{ limit }} caractéres"
+     * minMessage = "la description de l'evenement doit comporter au moins {{ limit }}caractéres",
+     * maxMessage = "la description de l'evenement doit comporter au plus {{ limit }} caractéres"
      * )
      */
     private $description;
@@ -62,6 +62,8 @@ class Evenement
      * @var \DateTime
      *
      * @ORM\Column(name="date", type="date", nullable=false)
+     *  @Assert\Date()
+     * @Assert\GreaterThan("today")
      */
     private $date;
 

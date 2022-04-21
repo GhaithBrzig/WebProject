@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Evenement;
 use App\Form\EvenementType;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -24,6 +25,26 @@ class EvenementController extends AbstractController
 
         return $this->render('liste_evenement/index.html.twig',array( "evenements" => $evenement));
 
+    }
+    /**
+     * @Route("/evenementBack", name="evenement_Back", methods={"GET"})
+     */
+    public function indexBack(EntityManagerInterface $entityManager, Request $request,PaginatorInterface $paginator): Response
+    {
+        $evenements = $entityManager
+            ->getRepository(Evenement::class)
+            ->findAll();
+
+        $evpagination = $paginator->paginate(
+            $evenements, // on passe les donnees
+            $request->query->getInt('page', 1),// Numéro de la page en cours, passé dans l'URL, 1 si aucune page
+            5
+        );
+
+        return $this->render('evenement/evenementBack.html.twig', [
+            'evenements' => $evpagination,
+
+        ]);
     }
     /**
      * @Route("/", name="evenement_index", methods={"GET"})

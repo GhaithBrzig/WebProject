@@ -12,27 +12,25 @@
                     <tr>
 
                         <th scope="col">Id</th>
-                        <th scope="col">Nomclient</th>
-                        <th scope="col">Numero</th>
+                        <th scope="col">Type</th>
+                        <th scope="col">Description</th>
                         <th scope="col">Nbpersonne</th>
                         <th scope="col">Date</th>
-
-                        <th scope="col">Archived</th>
                         <th scope="col">&nbsp;</th>
                     </tr>
                     </thead>
                     <tbody>
 
                     <tr>
-                        {% for reservation in reservations %}
+                        {% for evenement in evenements %}
                     <tr>
-                        <td class="tm-product-name">{{ reservation.id }}</td>
-                        <td >{{ reservation.nomclient }}</td>
-                        <td>{{ reservation.numero }}</td>
-                        <td>{{ reservation.nbpersonne }}</td>
-                        <td>{{ reservation.date ? reservation.date|date('Y-m-d') : '' }}</td>
+                        <td class="tm-product-name">{{ evenement.id }}</td>
+                        <td >{{ evenement.type }}</td>
+                        <td>{{ evenement.description }}</td>
+                        <td>{{ evenement.nbpersonne }}</td>
+                        <td>{{ evenement.date ? evenement.date|date('Y-m-d') : '' }}</td>
 
-                        <td>{{ reservation.archived ? 'Yes' : 'No' }}</td>
+
 
                     </tr>
                     {% else %}
@@ -47,7 +45,7 @@
                 </table>
 
             </div>
-            {{ knp_pagination_render(reservations) }}
+            {{ knp_pagination_render(evenements) }}
             <!-- table container -->
 
 

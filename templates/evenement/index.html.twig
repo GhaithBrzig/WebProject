@@ -5,37 +5,56 @@
 {% block body %}
     <h1>Evenement index</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Type</th>
-                <th>Description</th>
-                <th>Nombre de personne</th>
-                <th>Date</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for evenement in evenements %}
-            <tr>
-                <td>{{ evenement.id }}</td>
-                <td>{{ evenement.type }}</td>
-                <td>{{ evenement.description }}</td>
-                <td>{{ evenement.nbpersonne }}</td>
-                <td>{{ evenement.date ? evenement.date|date('Y-m-d') : '' }}</td>
-                <td>
-                    <a href="{{ path('evenement_show', {'id': evenement.id}) }}">show</a>
-                    <a href="{{ path('evenement_edit', {'id': evenement.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="6">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+    <section class="food_section layout_padding">
+        <div class="container">
+            <div class="heading_container heading_center">
+                <h2>
+                    Evenements
+                </h2>
+            </div>
+
+
+
+            <div class="filters-content">
+                <div class="row grid">
+                    {% for e in evenements%}
+                        <div class="col-sm-6 col-lg-4 all pizza">
+                            <div class="box">
+                                <div>
+
+                                    <div class="detail-box">
+                                        <h1>
+                                            {{e.type}}
+                                        </h1>
+                                        <p>
+                                            {{e.description}}
+                                        </p>
+
+                                        <p>
+                                            {{e.nbpersonne}}
+                                        </p>
+                                        <p>
+                                            {{ e.date ? e.date|date('Y-m-d') : '' }}
+                                        </p>
+
+
+                                        <a href="{{ path('evenement_show', {'id': e.id}) }}">show</a>
+                                        <a href="{{ path('evenement_edit', {'id': e.id}) }}"><h6>Edit</h6></a>
+
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    {% endfor %}
+
+                </div>
+            </div>
+        </div>
+
+    </section>
 
     <a href="{{ path('evenement_new') }}">Create new</a>
 {% endblock %}
