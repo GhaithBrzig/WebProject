@@ -13,7 +13,7 @@
                 <th>Numero</th>
                 <th>Nbpersonne</th>
                 <th>Date</th>
-                <th>IdEvenement</th>
+
                 <th>Archived</th>
                 <th>actions</th>
             </tr>
@@ -26,7 +26,7 @@
                 <td>{{ reservation.numero }}</td>
                 <td>{{ reservation.nbpersonne }}</td>
                 <td>{{ reservation.date ? reservation.date|date('Y-m-d') : '' }}</td>
-                <td>{{ reservation.idEvenement }}</td>
+
                 <td>{{ reservation.archived ? 'Yes' : 'No' }}</td>
                 <td>
                     <a href="{{ path('reservation_show', {'id': reservation.id}) }}">show</a>

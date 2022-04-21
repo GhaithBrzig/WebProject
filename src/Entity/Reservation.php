@@ -56,19 +56,12 @@ class Reservation
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date", type="date")
+     * @ORM\Column(name="date", type="datetime")
      *  @Assert\Date()
      * @Assert\GreaterThan("today")
      */
     private $date;
 
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="id_evenement", type="integer")
-     *
-     */
-    private $idEvenement;
 
     /**
      * @var bool|null
@@ -76,6 +69,13 @@ class Reservation
      * @ORM\Column(name="archived", type="boolean")
      */
     private $archived = '0';
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Evenement::class, inversedBy="reservations")
+     * @ORM\JoinColumn(nullable=false, name="id_evenement", referencedColumnName="id")
+     */
+    private $idEvenement;
+
 
     public function getId(): ?int
     {
@@ -130,17 +130,7 @@ class Reservation
         return $this;
     }
 
-    public function getIdEvenement(): ?int
-    {
-        return $this->idEvenement;
-    }
 
-    public function setIdEvenement(int $idEvenement): self
-    {
-        $this->idEvenement = $idEvenement;
-
-        return $this;
-    }
 
     public function getArchived(): ?bool
     {
@@ -150,6 +140,18 @@ class Reservation
     public function setArchived(?bool $archived): self
     {
         $this->archived = $archived;
+
+        return $this;
+    }
+
+    public function getIdEvenement(): ?evenement
+    {
+        return $this->idEvenement;
+    }
+
+    public function setIdEvenement(?evenement $idEvenement): self
+    {
+        $this->idEvenement = $idEvenement;
 
         return $this;
     }

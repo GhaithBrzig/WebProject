@@ -28,9 +28,7 @@
                                     <h6>
                                         {{ reservation.date ? reservation.date|date('Y-m-d') : '' }}
                                     </h6>
-                                    <h6>
-                                        {{ reservation.idEvenement }}
-                                    </h6>
+
                                     <h6>
                                         {{ reservation.archived ? 'Yes' : 'No' }}
                                     </h6>
@@ -45,7 +43,12 @@
 
         </div>
     </div>
+    <div class="btn-box justify-content-start">
+        <a href ="{{ path('reservation_delete', {'id': reservation.id}) }}">
 
+            Delete
+        </a>
+    </div>
 
     <a href="{{ path('reservation_index') }}">back to list</a>
 

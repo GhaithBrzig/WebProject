@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -63,6 +65,17 @@ class Evenement
      */
     private $date;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Reservation::class, mappedBy="idEvenement", orphanRemoval=true)
+     */
+    private $reservations;
+
+
+    public function __construct()
+    {
+        $this->reservations = new ArrayCollection();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -112,6 +125,36 @@ class Evenement
     public function setDate(\DateTimeInterface $date): self
     {
         $this->date = $date;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Reservation[]
+     */
+    public function getReservations(): Collection
+    {
+        return $this->reservations;
+    }
+
+    public function addYe(Reservation $ye): self
+    {
+        if (!$this->reservations->contains($ye)) {
+            $this->reservations[] = $ye;
+            $ye->setIdEvenement($this);
+        }
+
+        return $this;
+    }
+
+    public function removeYe(Reservation $ye): self
+    {
+        if ($this->reservations->removeElement($ye)) {
+            // set the owning side to null (unless already changed)
+            if ($ye->getIdEvenement() === $this) {
+                $ye->setIdEvenement(null);
+            }
+        }
 
         return $this;
     }

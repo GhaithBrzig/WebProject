@@ -74,11 +74,9 @@
                         <div class="date-event" style="display:flex;">
 
 
-                            {{ form_widget(form.date, {'attr' : { 'class' : 'form-control'}}) }}
+                            {{ form_widget(form.date) }}
                         </div>
-                        <div>
-                            {{ form_widget(form.idEvenement, {'attr' : { 'class' : 'form-control' , 'placeholder' : 'id evennement'}}) }}
-                        </div>
+
                         <div>
                             {{ form_row(form.Save) }}
                         </div>
