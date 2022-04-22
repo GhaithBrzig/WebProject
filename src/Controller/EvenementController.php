@@ -17,6 +17,33 @@ use Symfony\Component\Routing\Annotation\Route;
 class EvenementController extends AbstractController
 {
     /**
+     * @Route("/stats", name="evenement_stats")
+     */
+    public function statistics(EntityManagerInterface $entityManager): response
+    {
+        $evenements = $entityManager
+            ->getRepository(Evenement::class)
+            ->findAll();
+
+
+
+        $evenementName = [];
+        $evenementCount = [];
+        // On "démonte" les données pour les séparer tel qu'attendu par ChartJS
+        foreach($evenements as $evenement){
+            $evenementName[] = $evenement->getType();
+            $evenementCount[]= count($evenement->getReservations());
+        }
+
+
+        return $this->render('evenement/stats.html.twig', [
+            'evenementName' => json_encode($evenementName),
+            'evenementCount' => json_encode($evenementCount)
+
+        ]);
+
+    }
+    /**
      * @Route("/liste/evenement", name="liste_evenement")
      */
     public function liste_evenement()

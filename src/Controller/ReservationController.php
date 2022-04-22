@@ -65,7 +65,7 @@ class ReservationController extends AbstractController
             $entityManager->flush();
             $flashy->success('Reservation Ajouté', 'http://your-awesome-link.com');
 
-            return $this->redirectToRoute('reservation_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('liste_reservation', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('reservation/new.html.twig', [
@@ -97,7 +97,7 @@ class ReservationController extends AbstractController
             $entityManager->persist($reservation);
             $entityManager->flush();
 
-            return $this->redirectToRoute('reservation_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('liste_reservation', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('reservation/edit.html.twig', [
@@ -118,7 +118,7 @@ class ReservationController extends AbstractController
             $entityManager->flush();
 
 
-        return $this->redirectToRoute('reservation_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('liste_reservation', [], Response::HTTP_SEE_OTHER);
     }
 
 }
