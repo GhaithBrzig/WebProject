@@ -27,7 +27,7 @@
                 <th>Date</th>
                 <td>{{ evenement.date ? evenement.date|date('Y-m-d') : '' }}</td>
             </tr>
-            <img src="https://api.qrserver.com/v1/create-qr-code/?data={{evenement.type}},{{ evenement.description}}&amp;size=50x50" alt="" title=":" style="margin-left: 1200px"/>
+            <img src="https://api.qrserver.com/v1/create-qr-code/?data= l'id de l'evenement :{{evenement.id}},le type d'evenement :{{evenement.type}},la description :{{ evenement.description}},Date:{{ evenement.date ? evenement.date|date('Y-m-d') : '' }}&amp;size=250x250" alt="" title=":" style="atsc-nav-index:1000px"/>
         </tbody>
     </table>
 

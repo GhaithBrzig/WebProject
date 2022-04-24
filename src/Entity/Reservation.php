@@ -59,6 +59,7 @@ class Reservation
      * @ORM\Column(name="date", type="datetime")
      *  @Assert\Date()
      * @Assert\GreaterThan("today")
+     *
      */
     private $date;
 

@@ -11,11 +11,51 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Knp\Component\Pager\PaginatorInterface;
 use MercurySeries\FlashyBundle\FlashyNotifier;
+use Dompdf\Dompdf;
+use Dompdf\Options;
+
 /**
  * @Route("/reservation")
  */
 class ReservationController extends AbstractController
 {
+    /**
+     * @Route("/reservationinfo", name="reservation_info", methods={"GET"})
+     */
+    public function reservationinfo(EntityManagerInterface $entityManager): Response
+    {
+        // Configure Dompdf according to your needs
+        $pdfOptions = new Options();
+        $pdfOptions->set('defaultFont', 'Arial');
+
+        // Instantiate Dompdf with our options
+        $dompdf = new Dompdf($pdfOptions);
+        $reservations = $entityManager
+            ->getRepository(Reservation::class)
+            ->findAll();
+
+        // Retrieve the HTML generated in our twig file
+        $html = $this->renderView('reservation/reservationinfo.html.twig', [
+            'reservations' => $reservations,
+        ]);
+
+        // Load HTML to Dompdf
+        $dompdf->loadHtml($html);
+
+        // (Optional) Setup the paper size and orientation 'portrait' or 'portrait'
+        $dompdf->setPaper('A4', 'portrait');
+
+        // Render the HTML as PDF
+        $dompdf->render();
+
+        // Output the generated PDF to Browser (force download)
+        $dompdf->stream("ReservationList.pdf", [
+            "Attachment" => true
+        ]);
+
+        return $this->redirectToRoute('reservation_index', [], Response::HTTP_SEE_OTHER);
+
+    }
     /**
      * @Route("/", name="reservation_index", methods={"GET"})
      */
@@ -39,7 +79,7 @@ class ReservationController extends AbstractController
             ->getRepository(Reservation::class)
             ->findAll();
 
-        $respagination = $paginator->paginate(
+            $respagination = $paginator->paginate(
             $reservations, // on passe les donnees
             $request->query->getInt('page', 1),// Numéro de la page en cours, passé dans l'URL, 1 si aucune page
             5
