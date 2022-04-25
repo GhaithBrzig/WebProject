@@ -2,6 +2,11 @@
 {% block title %} Home page {% endblock %}
 {% block container %}
 
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        <script type="text/javascript">
+            {{ gc_draw(piechart, 'div_chart') }}
+        </script>
+
     <div class="container">
         <div class="row">
             <div class="col">
@@ -10,10 +15,9 @@
         </div>
         <!-- row -->
         <div class="row tm-content-row">
-            <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 tm-block-col">
-                <div class="tm-bg-primary-dark tm-block">
+            <div  class="col-sm-12 col-md-12 col-lg-12 col-xl-12 tm-block-col">
+                <div  id="div_chart"lass="tm-bg-primary-dark tm-blocks tm-block-taller">
                     <h2 class="tm-block-title">Latest Hits</h2>
-                    <canvas id="lineChart"></canvas>
                 </div>
             </div>
             <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 tm-block-col">
@@ -23,7 +27,7 @@
                 </div>
             </div>
             <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 tm-block-col">
-                <div class="tm-bg-primary-dark tm-block tm-block-taller">
+                <div  class="tm-bg-primary-dark tm-block tm-block-taller">
                     <h2 class="tm-block-title">Storage Information</h2>
                     <div id="pieChartContainer">
                         <canvas id="pieChart" class="chartjs-render-monitor" width="200" height="200"></canvas>

@@ -10,15 +10,6 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class DefaultController extends AbstractController
 {
-    /**
-     * @Route("/", name="index")
-     */
-    public function index(): Response
-    {
-        return $this->render('index.html.twig', [
-            'controller_name' => 'DefaultController',
-        ]);
-    }
 
 
     /**

@@ -17,17 +17,17 @@ use Symfony\Component\Serializer\Encoder\XmlEncoder;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Serializer;
+use CMEN\GoogleChartsBundle\GoogleCharts\Charts\BarChart;
 
 class StockController extends AbstractController
 {
     /**
-     * @Route("/stockaq", name="app_stock")
+     * @Route("/a", name="indexa")
      */
     public function index(): Response
     {
-        return $this->render('stock/index.html.twig', [
-            'controller_name' => 'StockController',
-        ]);
+        $produit = $this->getDoctrine()->getRepository(Stock::class)->findAll();
+        return $this->render('index.html.twig', ['produits' => $produit]);
     }
 
 
@@ -226,5 +226,63 @@ class StockController extends AbstractController
         $jsonContent = $serializer->serialize($produits, 'json');
         $retour = json_encode($jsonContent);
         return new Response($retour);
+    }
+
+    /**
+     * @Route("/ff", name="indexff")
+     */
+    public function statistics(StockRepository $repository): response
+    {
+        $produits = $repository->findAll();
+
+
+
+
+        $productName = [];
+        $productCount = [];
+        // On "démonte" les données pour les séparer tel qu'attendu par ChartJS
+        foreach ($produits as $produit) {
+            $productName[] = $produit->getNom();
+            $productCount[] = $produit->getQuantite();;
+        }
+
+
+        return $this->render('index.html.twig', [
+            'evenementName' => json_encode($productName),
+            'evenementCount' => json_encode($productCount)
+
+        ]);
+    }
+
+    /**
+     * @Route("/", name="index")
+     */
+    public function RenderStatistics(StockRepository $repository)
+    {
+        $produits = $repository->findAll();
+        $x = 1;
+        $chart[0][0] = 'Product';
+        $chart[0][1] = 'Quantity';
+        $chart[0][2] = 'Price';
+        foreach ($produits as $i) {
+            $chart[$x][] = $i->getNom();
+            $chart[$x][] = $i->getQuantite();
+            $chart[$x][] = $i->getPrixUnitaire();
+            // var_dump();
+            $x++;
+        }
+        // var_dump($chart);
+        $bar = new BarChart();
+        $bar->getData()->setArrayToDataTable($chart);
+        $bar->getOptions()->setTitle('Products in stock');
+        $bar->getOptions()->getHAxis()->setTitle('Quantity and price');
+        $bar->getOptions()->getHAxis()->setMinValue(0);
+        $bar->getOptions()->getVAxis()->setTitle('Products');
+        $bar->getOptions()->setWidth(1120);
+        $bar->getOptions()->setHeight(500);
+        $bar->getOptions()->setBackgroundColor('#435c70');
+
+
+        return $this->render('index.html.twig', array('piechart' => $bar));
     }
 }

@@ -6,6 +6,7 @@
         "ext-ctype": "*",
         "ext-iconv": "*",
         "api-platform/core": "^2.6",
+        "cmen/google-charts-bundle": "^5.0",
         "cron/cron-bundle": "^2.10",
         "doctrine/annotations": "^1.13",
         "doctrine/doctrine-bundle": "^2.6",

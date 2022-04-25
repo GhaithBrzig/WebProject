@@ -13,6 +13,9 @@
             "./src/Entity/.gitignore"
         ]
     },
+    "cmen/google-charts-bundle": {
+        "version": "5.0.0"
+    },
     "cron/cron": {
         "version": "1.6.0"
     },
