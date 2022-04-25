@@ -92,6 +92,27 @@ class ReservationController extends AbstractController
     }
 
     /**
+     * @Route("/reservationBack/d", name="reservation_Back_d", methods={"GET"})
+     */
+    public function indexBackD(EntityManagerInterface $entityManager, Request $request,PaginatorInterface $paginator): Response
+    {
+        $reservations = $entityManager
+            ->getRepository(Reservation::class)
+            ->findBy([],["date" => "asc"]);
+
+        $respagination = $paginator->paginate(
+            $reservations, // on passe les donnees
+            $request->query->getInt('page', 1),// Numéro de la page en cours, passé dans l'URL, 1 si aucune page
+            5
+        );
+
+        return $this->render('reservation/reservationBack.html.twig', [
+            'reservations' => $respagination,
+
+        ]);
+    }
+
+    /**
      * @Route("/new", name="reservation_new", methods={"GET", "POST"})
      */
     public function new(Request $request, EntityManagerInterface $entityManager,FlashyNotifier $flashy): Response
