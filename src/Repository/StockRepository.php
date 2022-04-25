@@ -82,4 +82,12 @@ class StockRepository extends ServiceEntityRepository
             ->setParameter('nom', '%' . $nom . '%')
             ->getQuery()->getResult();
     }
+
+    function SearchTopP()
+    {
+        return $this->createQueryBuilder('s')
+            ->setMaxResults(5)
+            ->orderBy('s.quantite', 'asc')
+            ->getQuery()->getResult();
+    }
 }

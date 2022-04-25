@@ -259,7 +259,7 @@ class StockController extends AbstractController
      */
     public function RenderStatistics(StockRepository $repository)
     {
-        $produits = $repository->findAll();
+        $produits = $repository->SearchTopP();
         $x = 1;
         $chart[0][0] = 'Product';
         $chart[0][1] = 'Quantity';
