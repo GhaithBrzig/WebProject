@@ -13,12 +13,20 @@ use Knp\Component\Pager\PaginatorInterface;
 use MercurySeries\FlashyBundle\FlashyNotifier;
 use Dompdf\Dompdf;
 use Dompdf\Options;
+use \Twilio\Rest\Client;
+
 
 /**
  * @Route("/reservation")
  */
 class ReservationController extends AbstractController
 {
+    private $twilio;
+
+    public function __construct(Client $twilio)
+    {
+        $this->twilio = $twilio;
+    }
     /**
      * @Route("/reservationinfo", name="reservation_info", methods={"GET"})
      */
@@ -125,7 +133,12 @@ class ReservationController extends AbstractController
             $entityManager->persist($reservation);
             $entityManager->flush();
             $flashy->success('Reservation Ajouté', 'http://your-awesome-link.com');
-
+            $message = $this->twilio->messages->create(
+                '+21627086945', // Send text to this number
+                array(
+                    'from' => '+19124614145', // My Twilio phone number
+                    'body' => 'Vous etes le bienvenue:'.$reservation->getNomclient().' '.$reservation->getNbpersonne()
+                ));
             return $this->redirectToRoute('liste_reservation', [], Response::HTTP_SEE_OTHER);
         }
 
