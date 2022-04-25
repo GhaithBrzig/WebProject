@@ -1,0 +1,47 @@
+{% extends 'livraison_front/baseFront.html.twig' %}
+
+{% block title %}Hello LivraisonFrontController!{% endblock %}
+
+{% block body %}
+<body class="sub_page">
+<section class="book_section layout_padding">
+<div class="center">
+    
+      
+ <table>
+                <thead>
+                  <tr>
+                 
+                    <th scope="col">LIVREUR</th>
+                    <th scope="col">FRAIS LIVRAISON</th>
+                    <th scope="col">COMMANDE</th>
+                    <th scope="col">TOTALE</th>
+                    <th scope="col">&nbsp;</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr {% for l in livraisons %}>
+                    {% if (l.tot < 100) %}
+                    <td>{{(l.idlivreur)}}</td>
+                    <td>{{l.fraisdelivraison}}</td>
+                    <td>{{l.idCommande}}</td>
+                    <td>{{l.tot + l.fraisdelivraison}} </td>
+                    <td></td>
+                    {% else %}
+                    <td>{{(l.idlivreur)}}</td>
+                    <td>0</td>
+                    <td>{{l.idCommande}}</td>
+                    <td>{{l.tot}} </td>
+                    <td></td>
+                    {% endif %}
+                  </tr {% endfor %}>
+                  
+                </tbody>
+              </table>
+    </div>
+
+  </section>
+      </body>
+
+
+{% endblock %}

@@ -1,0 +1,26 @@
+
+<h1> Liste des livraisons</h1>
+<table border="1">
+<thead>
+    <tr>
+        <th>livreur</th>
+        <th>frais de livraisons</th>
+        <th>commande</th>
+        <th>totale</th>
+        
+    </tr>
+</thead>
+<tbody>
+    {% for l in livraison %}
+        <tr>
+            <td>{{ l.idlivreur }}</td>
+            <td>{{l.fraisdelivraison}}</td>
+            <td>{{ l.idCommande }}</td>
+            <td>{{ l.tot }}</td>
+
+            
+            
+        </tr>
+    {% endfor %}
+</tbody>
+</table>
