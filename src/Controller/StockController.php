@@ -7,6 +7,7 @@ use App\Entity\Stockcategory;
 use App\Form\StockFType;
 use App\Service\MailerService;
 use App\Repository\StockRepository;
+use App\Repository\StockcategoryRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request as HttpFoundationRequest;
@@ -228,37 +229,26 @@ class StockController extends AbstractController
         return new Response($retour);
     }
 
-    /**
-     * @Route("/ff", name="indexff")
-     */
-    public function statistics(StockRepository $repository): response
-    {
-        $produits = $repository->findAll();
 
-
-
-
-        $productName = [];
-        $productCount = [];
-        // On "démonte" les données pour les séparer tel qu'attendu par ChartJS
-        foreach ($produits as $produit) {
-            $productName[] = $produit->getNom();
-            $productCount[] = $produit->getQuantite();;
-        }
-
-
-        return $this->render('index.html.twig', [
-            'evenementName' => json_encode($productName),
-            'evenementCount' => json_encode($productCount)
-
-        ]);
-    }
 
     /**
      * @Route("/", name="index")
      */
-    public function RenderStatistics(StockRepository $repository)
+    public function RenderStatistics(StockRepository $repository, StockcategoryRepository $repository1)
     {
+        $categories = $repository1->findAll();
+
+
+
+
+        $categoryName = [];
+        $productCount = [];
+        // On "démonte" les données pour les séparer tel qu'attendu par ChartJS
+        foreach ($categories as $category) {
+            $categoryName[] = $category->getNom();
+            $productCount[] = count($category->getStocks());;
+        }
+
         $produits = $repository->SearchTopP();
         $x = 1;
         $chart[0][0] = 'Product';
@@ -283,6 +273,10 @@ class StockController extends AbstractController
         $bar->getOptions()->setBackgroundColor('#435c70');
 
 
-        return $this->render('index.html.twig', array('piechart' => $bar));
+        return $this->render('index.html.twig',  [
+            'piechart' => $bar,
+            'categoryName' => json_encode($categoryName),
+            'productCount' => json_encode($productCount)
+        ]);
     }
 }

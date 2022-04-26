@@ -68,7 +68,7 @@ class Stock
     /**
      * @var \Stockcategory
      *
-     * @ORM\ManyToOne(targetEntity="Stockcategory")
+     * @ORM\ManyToOne(targetEntity=Stockcategory::class, inversedBy="stocks")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_categorie", referencedColumnName="ID")
      * })

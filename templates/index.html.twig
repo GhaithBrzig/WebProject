@@ -2,10 +2,20 @@
 {% block title %} Home page {% endblock %}
 {% block container %}
 
+<script src="{{ asset('back/js/jquery-3.3.1.min.js') }}"></script>
+
+<!-- https://jquery.com/download/ -->
+<script src="{{asset('back/js/bootstrap.min.js')}}"></script>
+<!-- https://getbootstrap.com/ -->
+<script src="{{asset('back/js/moment.min.js')}}"></script>
+<!-- https://momentjs.com/ -->
+<script src="{{asset('back/js/Chart.min.js')}}"></script>
+<!-- http://www.chartjs.org/docs/latest/ -->
         <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
         <script type="text/javascript">
             {{ gc_draw(piechart, 'div_chart') }}
         </script>
+        
 
     <div class="container">
         <div class="row">
@@ -15,6 +25,53 @@
         </div>
         <!-- row -->
         <div class="row tm-content-row">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css" integrity="sha512-/zs32ZEJh+/EO2N1b0PEdoA10JkdC3zJ8L5FTiQu82LR9S/rOQNfQN7U59U9BC12swNeRAz3HSzIL2vpp4fv3w==" crossorigin="anonymous">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js" integrity="sha512-s+xg36jbIujB2S2VKfpGmlC3T5V2TF3lY48DX7u2r9XzGzgPsa6wTpOQA7J9iffvdeBN0q9tKzRxVxw1JviZPg==" crossorigin="anonymous"></script>
+<h2 class="tm-block-title">Statistique </h2>
+<div  class="col-sm-12 col-md-12 col-lg-12 col-xl-12 tm-block-col">
+                <div  class="tm-bg-primary-dark tm-blocks tm-block-taller">
+
+
+   
+    <canvas id="evenement" class="chartjs-render-monitor" height="120px"></canvas>
+                </div>
+</div>
+<script>
+    let evenement = document.querySelector("#evenement")
+    let eveGraph = new Chart(evenement, {
+        type: "pie",
+        data: {
+            labels: {{ categoryName|raw }},
+            datasets: [{
+                label: "Répartition des évenements",
+                data: {{ productCount|raw }},
+                backgroundColor: ["#20c997","#fd7e14","yellow","red"],
+              
+            }]
+        },
+
+        options: {
+                legend: {
+                    display: true,
+                    labels: {
+                        fontColor: "#FFF",
+                        fontSize: 14
+                    }
+                    },
+                    tooltips: {
+                      backgroundColor: '#000',
+                      titleFontSize: 16,
+                      ttitleFontColor: '#0066ff',
+                      bodyFontColor: '#FFFFFF',
+                      bodyFontSize: 14,
+                      displayColors: false
+                   }
+               }
+        
+    })
+
+</script>
+
             <div  class="col-sm-12 col-md-12 col-lg-12 col-xl-12 tm-block-col">
                 <div  id="div_chart"lass="tm-bg-primary-dark tm-blocks tm-block-taller">
                     <h2 class="tm-block-title">Latest Hits</h2>
@@ -267,4 +324,5 @@
             </div>
         </div>
     </div>
+    
     {% endblock %}

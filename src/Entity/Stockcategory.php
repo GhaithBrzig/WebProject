@@ -5,6 +5,8 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
 
 
@@ -34,6 +36,17 @@ class Stockcategory
      */
     private $nom;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Stock::class, mappedBy="idCategorie", orphanRemoval=true)
+     */
+    private $stocks;
+
+
+    public function __construct()
+    {
+        $this->stocks = new ArrayCollection();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -53,5 +66,12 @@ class Stockcategory
     public function __toString()
     {
         return $this->nom;
+    }
+    /**
+     * @return Collection|Stock[]
+     */
+    public function getStocks(): Collection
+    {
+        return $this->stocks;
     }
 }
